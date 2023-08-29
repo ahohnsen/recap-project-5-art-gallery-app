@@ -11,7 +11,7 @@ const List = styled.ul`
   justify-content: center;
 `;
 
-export default function ArtPieces({ pieces }) {
+export default function ArtPieces({ pieces, artPiecesInfo, onToggleFavorite }) {
   return (
     <List>
       {pieces?.map((piece) => (
@@ -21,6 +21,11 @@ export default function ArtPieces({ pieces }) {
           image={piece.imageSource}
           artist={piece.artist}
           slug={piece.slug}
+          isFavorite={
+            artPiecesInfo?.find((artPiece) => artPiece.slug === piece.slug)
+              ?.isFavorite
+          }
+          onToggleFavorite={() => onToggleFavorite(piece.slug)}
         />
       ))}
     </List>

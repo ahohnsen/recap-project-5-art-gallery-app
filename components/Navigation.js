@@ -15,7 +15,7 @@ const NavLink = styled(Link)`
   text-decoration: none;
   padding: 0 0.3rem;
   /* color: ${({ active }) => (active ? "var(--primary-color)" : "black")}; */
-  color: ${({ isActive }) => (isActive ? "var(--primary-color)" : "black")};
+  color: ${({ $isActive }) => ($isActive ? "var(--primary-color)" : "black")};
   font-weight: bold;
   &:hover {
     border-bottom: 5px dotted var(--primary-color);

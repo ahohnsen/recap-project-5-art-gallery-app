@@ -1,5 +1,6 @@
 import Image from "next/image.js";
 import styled from "styled-components";
+import FavoriteButton from "@/components/FavoriteButton.js";
 
 const ImageContainer = styled.div`
   position: relative;
@@ -18,10 +19,20 @@ const Wrapper = styled.div`
   gap: 1rem;
 `;
 
-export default function ArtPiecePreview({ image, artist }) {
+export default function Spotlight({
+  image,
+  artist,
+  onToggleFavorite,
+  isFavorite,
+}) {
   return (
     <Wrapper>
       <ImageContainer>
+        <FavoriteButton
+          isFavorite={isFavorite}
+          onToggleFavorite={onToggleFavorite}
+          positionAbsolute={true}
+        />
         <StyledImage src={image} alt={`spotlight: ${artist}`} fill />
       </ImageContainer>
       <h2>{artist}</h2>

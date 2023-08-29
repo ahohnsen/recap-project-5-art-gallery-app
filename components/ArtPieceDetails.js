@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Image from "next/image.js";
+import FavoriteButton from "@/components/FavoriteButton.js";
 
 const Wrapper = styled.section`
   display: flex;
@@ -54,6 +55,8 @@ export default function ArtPiecesDetails({
   year,
   genre,
   onBack,
+  isFavorite,
+  onToggleFavorite,
 }) {
   return (
     <Wrapper>
@@ -61,6 +64,10 @@ export default function ArtPiecesDetails({
         <BackButton type="button" onClick={onBack} aria-label="navigate back">
           ←
         </BackButton>
+        <FavoriteButton
+          isFavorite={isFavorite}
+          onToggleFavorite={onToggleFavorite}
+        />
       </ActionContainer>
       <h2>{title}</h2>
       <ImageContainer>

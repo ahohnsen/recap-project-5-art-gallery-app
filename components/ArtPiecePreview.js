@@ -1,6 +1,7 @@
 import Image from "next/image.js";
 import Link from "next/link.js";
 import styled from "styled-components";
+import FavoriteButton from "@/components/FavoriteButton.js";
 
 const ArtPiece = styled.li`
   width: 30rem;
@@ -52,10 +53,22 @@ const ScreenReaderOnly = styled.span`
   border-width: 0;
 `;
 
-export default function ArtPiecePreview({ image, artist, title, slug }) {
+export default function ArtPiecePreview({
+  image,
+  artist,
+  title,
+  slug,
+  isFavorite,
+  onToggleFavorite,
+}) {
   return (
     <ArtPiece>
       <Figure>
+        <FavoriteButton
+          isFavorite={isFavorite}
+          onToggleFavorite={onToggleFavorite}
+          positionAbsolute={true}
+        />
         <StyledImage src={image} alt={title} fill />
         <Caption>
           {title} by {artist}
