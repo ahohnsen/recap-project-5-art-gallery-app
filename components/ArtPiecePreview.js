@@ -1,4 +1,5 @@
 import Image from "next/image.js";
+import Link from "next/link.js";
 import styled from "styled-components";
 
 const ArtPiece = styled.li`
@@ -27,7 +28,31 @@ const StyledImage = styled(Image)`
   object-fit: cover;
 `;
 
-export default function ArtPiecePreview({ image, artist, title }) {
+const StyledLink = styled(Link)`
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+`;
+
+const ScreenReaderOnly = styled.span`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+`;
+
+export default function ArtPiecePreview({ image, artist, title, slug }) {
   return (
     <ArtPiece>
       <Figure>
@@ -35,6 +60,9 @@ export default function ArtPiecePreview({ image, artist, title }) {
         <Caption>
           {title} by {artist}
         </Caption>
+        <StyledLink href={`/art-pieces/${slug}`}>
+          <ScreenReaderOnly>More Info</ScreenReaderOnly>
+        </StyledLink>
       </Figure>
     </ArtPiece>
   );
