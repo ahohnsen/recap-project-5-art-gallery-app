@@ -28,6 +28,39 @@ export default function App({ Component, pageProps }) {
     }
   }
 
+  function addComment(slug, newComment) {
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleString("en-US", {
+      hour12: false,
+    });
+
+    const artPiece = artPiecesInfo.find((piece) => piece.slug === slug);
+
+    const commentWithDate = { text: newComment, date: formattedDate };
+
+    if (artPiece) {
+      setArtPiecesInfo(
+        artPiecesInfo.map((pieceInfo) => {
+          if (pieceInfo.slug === slug) {
+            return pieceInfo.comments
+              ? {
+                  ...pieceInfo,
+                  comments: [...pieceInfo.comments, commentWithDate],
+                }
+              : { ...pieceInfo, comments: [commentWithDate] };
+          } else {
+            return pieceInfo;
+          }
+        })
+      );
+    } else {
+      setArtPiecesInfo([
+        ...artPiecesInfo,
+        { slug, isFavorite: false, comments: [commentWithDate] },
+      ]);
+    }
+  }
+
   return (
     <Layout>
       <GlobalStyle />
@@ -36,6 +69,7 @@ export default function App({ Component, pageProps }) {
         pieces={isLoading || error ? [] : data}
         artPiecesInfo={artPiecesInfo}
         onToggleFavorite={handleToggleFavorite}
+        onAddComment={addComment}
       />
     </Layout>
   );

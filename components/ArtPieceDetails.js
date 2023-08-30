@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Image from "next/image.js";
 import FavoriteButton from "@/components/FavoriteButton.js";
+import CommentForm from "@/components/CommentForm.js";
+import Comments from "@/components/Comments.js";
 
 const Wrapper = styled.section`
   display: flex;
@@ -12,6 +14,11 @@ const ActionContainer = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 12rem;
+`;
+
+const Headline = styled.h2`
+  text-align: center;
+  padding: 20px;
 `;
 
 const ImageContainer = styled.div`
@@ -26,8 +33,7 @@ const StyledImage = styled(Image)`
 
 const List = styled.ul`
   list-style: none;
-  padding-left: 0;
-
+  padding: 1rem 0;
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
@@ -57,6 +63,8 @@ export default function ArtPiecesDetails({
   onBack,
   isFavorite,
   onToggleFavorite,
+  comments,
+  onAddComment,
 }) {
   return (
     <Wrapper>
@@ -69,7 +77,7 @@ export default function ArtPiecesDetails({
           onToggleFavorite={onToggleFavorite}
         />
       </ActionContainer>
-      <h2>{title}</h2>
+      <Headline>{title}</Headline>
       <ImageContainer>
         <StyledImage
           src={image}
@@ -86,6 +94,8 @@ export default function ArtPiecesDetails({
         <li>{year}</li>
         <li>{genre}</li>
       </List>
+      {comments && <Comments comments={comments} />}
+      <CommentForm addComment={onAddComment} />
     </Wrapper>
   );
 }
