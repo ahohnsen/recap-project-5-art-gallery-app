@@ -5,7 +5,10 @@ import useSWR from "swr";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function HomePage() {
-  const { data } = useSWR("https://example-apis.vercel.app/api/art", fetcher);
+  const { data, isLoading, error } = useSWR(
+    "https://example-apis.vercel.app/api/art",
+    fetcher
+  );
 
   const spotlightPiece = data
     ? data[Math.floor(Math.random() * data.length)]
@@ -19,7 +22,7 @@ export default function HomePage() {
           artist={spotlightPiece.artist}
         />
       )}
-      <ArtPieces pieces={data} />
+      <ArtPieces pieces={isLoading || error ? [] : data} />
     </div>
   );
 }
