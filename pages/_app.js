@@ -10,6 +10,7 @@ export default function App({ Component, pageProps }) {
     "https://example-apis.vercel.app/api/art",
     fetcher
   );
+<<<<<<< HEAD
 
   const [artPiecesInfo, setArtPiecesInfo] = useState([]);
 
@@ -27,16 +28,22 @@ export default function App({ Component, pageProps }) {
       setArtPiecesInfo([...artPiecesInfo, { slug, isFavorite: true }]);
     }
   }
+=======
+>>>>>>> 4-art-piece-details-page
 
   return (
     <Layout>
       <GlobalStyle />
+<<<<<<< HEAD
       <Component
         {...pageProps}
         pieces={isLoading || error ? [] : data}
         artPiecesInfo={artPiecesInfo}
         onToggleFavorite={handleToggleFavorite}
       />
+=======
+      <Component {...pageProps} pieces={isLoading || error ? [] : data} />
+>>>>>>> 4-art-piece-details-page
     </Layout>
   );
 }
